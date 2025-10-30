@@ -120,7 +120,7 @@
     </li>
 
     <!-- 📣 Sales & Marketing Access -->
-     {% if email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
+    {% if request.user_email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
     <li class="dropdown">
       <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">
         <span><i class="fas fa-bullhorn"></i> Sales & Marketing</span>
@@ -133,24 +133,25 @@
     </li>
     {% endif %}
 
-    
     <!-- 🏗️ Construction Access -->
-      {% if email == 'elias@dzignscapeprofessionals.onmicrosoft.com' or
-      email == 'salim@dzignscapeprofessionals.onmicrosoft.com' or
-      email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
-  <li class="dropdown">
-    <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">
-      <span><i class="fas fa-hard-hat"></i> Construction</span>
-      <i class="fa fa-chevron-down toggle-icon"></i>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="{% url 'project_dashboard' %}?department=construction">Project Detailed</a></li>
-    </ul>
-  </li>
-{% endif %}
+    {% if request.user_email in [
+      'elias@dzignscapeprofessionals.onmicrosoft.com',
+      'salim@dzignscapeprofessionals.onmicrosoft.com',
+      'admin@dzignscapeprofessionals.onmicrosoft.com'
+    ] %}
+    <li class="dropdown">
+      <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">
+        <span><i class="fas fa-hard-hat"></i> Construction</span>
+        <i class="fa fa-chevron-down toggle-icon"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="{% url 'project_dashboard' %}?department=construction">Project Detailed</a></li>
+      </ul>
+    </li>
+    {% endif %}
 
     <!-- 💰 Finance Access -->
-     {% if email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
+    {% if request.user_email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
     <li class="dropdown">
       <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">
         <span><i class="fas fa-coins"></i> Finance</span>
