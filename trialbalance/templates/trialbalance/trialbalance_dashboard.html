@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Trial Balance Dashboard</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Account Name</th>
+                    <th scope="col">Account Type</th> <!-- ✅ New column -->
+                    <th scope="col" class="text-end">Debit Amount</th>
+                    <th scope="col" class="text-end">Credit Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in account_totals %}
+                <tr>
+                    <td>{{ row.account__account_name }}</td>
+                    <td>
+                        <span class="badge bg-info text-dark">
+                            {{ row.account__account_type|title }}
+                        </span>
+                    </td>
+                    <td class="text-end">৳ {{ row.debit_total|floatformat:2 }}</td>
+                    <td class="text-end">৳ {{ row.credit_total|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="table-light fw-bold">
+                <tr>
+                    <td colspan="2">Total</td>
+                    <td class="text-end">৳ {{ total_debit|floatformat:2 }}</td>
+                    <td class="text-end">৳ {{ total_credit|floatformat:2 }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<!-- 🎨 Custom CSS -->
+<style>
+/* Trial Balance Styling */
+body, .container, table, h2 {
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Table Width Control */
+.table {
+    width: 45%; /* ✅ Set table width */
+    max-width: 1200px; /* ✅ Optional: limit max width */
+    margin-left: 20px; /* ✅ Shift table to the right */
+    margin-right: auto; /* ✅ Prevent centering */
+    table-layout: auto; /* ✅ Allow flexible column widths */
+}
+
+/* Table Header */
+.table thead th {
+    background-color: #0d6efd;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #0b5ed7;
+    text-align: left; /* ✅ Left-align header text */
+    
+}
+
+/* Table Footer */
+.table tfoot td {
+    background-color: #0d6efd;
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 16px;
+    border-top: 2px solid #dee2e6;
+    text-align: left; /* ✅ Left-align footer text */
+}
+
+/* Table Body Cells */
+.table tbody td {
+    vertical-align: middle;
+    font-size: 15px;
+    color: #000000;
+    
+    text-align: left; /* ✅ Left-align all cell text */
+}
+
+/* Remove right alignment from numeric cells */
+.table td.text-end {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: #000000;
+    text-align: left; /* ✅ Override to left-align */
+}
+
+/* Section Heading */
+h2.mb-3 {
+    font-weight: 600;
+    color: #000000;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 5px;
+    margin-left: 20px;
+}
+
+/* Container Styling */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+</style>
+
+{% endblock %}
+
+
+

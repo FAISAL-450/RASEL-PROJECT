@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Journal Entry Dashboard</h2>
+        <span class="text-muted">Total Entries: {{ entries|length }}</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Transaction Ref</th>
+                    <th scope="col">Account Name</th>
+                    <th scope="col">Transaction Type</th>
+                    <th scope="col" class="text-end">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td>{{ entry.date|date:"d M Y" }}</td>
+                    <td>{{ entry.transaction.reference }}</td>
+                    <td>{{ entry.account.account_name }}</td>
+                    <td>
+                        {% if entry.entry_type == 'DEBIT' %}
+                            <span class="badge bg-success">Debit</span>
+                        {% else %}
+                            <span class="badge bg-danger">Credit</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end">৳ {{ entry.amount|floatformat:2 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No journal entries found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 🎨 Custom CSS -->
+<style>
+/* Base Styling */
+body, .container, table, h2 {
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    color: #212529;
+}
+
+/* Section Heading */
+h2.mb-0 {
+    font-weight: 600;
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 6px;
+}
+
+.text-muted {
+  color: #000000 !important;
+  font-size: 1.2rem !important;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: -10px; 
+
+}
+
+/* Entry Count */
+.text-muted {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Table Container */
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+/* Table Header */
+.table thead.table-dark th {
+    background-color: #0d6efd;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid #0b5ed7;
+    text-align: left;
+    padding: 12px;
+   
+}
+
+/* Table Body */
+.table tbody td {
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 10px;
+    color: #000000;
+    background-color: #f8f9fa;
+}
+
+/* Amount Column */
+.table td.text-end {
+    text-align: right;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Badges */
+.badge.bg-success {
+    background-color: #198754;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+/* Empty Row */
+.table tbody tr td.text-center {
+    font-style: italic;
+    font-size: 14px;
+    background-color: #f1f3f5;
+}
+
+/* Hover Effect */
+.table tbody tr:hover {
+    background-color: #e9f2ff;
+    transition: background-color 0.2s ease-in-out;
+}
+</style>
+
+{% endblock %}
+
+
+
+
+
+
+
+
