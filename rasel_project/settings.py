@@ -139,10 +139,16 @@ USE_TZ = True
 
 # 📦 Static Files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "construction" / "static",
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# ✅ Let Django auto-discover static files from all apps
+# Remove STATICFILES_DIRS unless you have global shared assets
+# If you do, use something like this:
+# STATICFILES_DIRS = [BASE_DIR / "shared_static"]
+
+# 📁 Where collectstatic will gather files for deployment
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# 🚀 Use hashed filenames for cache busting in production
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # 🆔 Default Primary Key
