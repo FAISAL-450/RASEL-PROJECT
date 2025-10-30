@@ -69,9 +69,6 @@ INSTALLED_APPS = [
     'transaction',
     'journalentry',
     'trialbalance',
-    'salesmarketing',
-    'customerdetailed',
-    'lead',
     'accounts',
 ]
 
@@ -90,7 +87,7 @@ MIDDLEWARE = [
 # 🔐 Azure AD Department Mapping
 DEPARTMENT_EMAIL_MAP = {
     'elias@dzignscapeprofessionals.onmicrosoft.com': 'construction',
-    'admin@dzignscapeprofessionals.onmicrosoft.com': 'construction,salesmarketing,finance',
+    'admin@dzignscapeprofessionals.onmicrosoft.com': 'construction,finance',
     'salim@dzignscapeprofessionals.onmicrosoft.com': 'construction',
 }
 

@@ -27,9 +27,8 @@ path('account/', include('account.urls')),
 path('transaction/', include('transaction.urls')),   
 path('journalentry/', include('journalentry.urls')),
 path('trialbalance/', include('trialbalance.urls')),
-path('salesmarketing/', include('salesmarketing.urls')),
-path('customerdetailed/', include('customerdetailed.urls')),
-path('lead/', include('lead.urls')),    
+
+
 path('accounts/', include('accounts.urls')),
 
 

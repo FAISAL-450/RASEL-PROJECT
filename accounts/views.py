@@ -1,13 +1,11 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import Profile
+from django.http import JsonResponse
+import base64, json
 
-@login_required
-def profile_list(request):
-    profiles = Profile.objects.select_related('user').all()
-    return render(request, 'accounts/profile_list.html', {'profiles': profiles})
+def debug_claims(request):
+    raw = request.META.get('X-MS-CLIENT-PRINCIPAL')
+    if raw:
+        decoded = base64.b64decode(raw).decode('utf-8')
+        return JsonResponse(json.loads(decoded), safe=False)
+    return JsonResponse({'error': 'No principal found'})
 
-@login_required
-def profile_detail(request, user_id):
-    profile = get_object_or_404(Profile, user__id=user_id)
-    return render(request, 'accounts/profile_detail.html', {'profile': profile})
+

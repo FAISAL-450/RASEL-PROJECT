@@ -119,19 +119,6 @@
       </a>
     </li>
 
-    <!-- 📣 Sales & Marketing Access -->
-    {% if request.user_email == 'admin@dzignscapeprofessionals.onmicrosoft.com' %}
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" role="button" aria-expanded="false">
-        <span><i class="fas fa-bullhorn"></i> Sales & Marketing</span>
-        <i class="fa fa-chevron-down toggle-icon"></i>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a href="{% url 'customerdetailed_dashboard' %}?department=salesmarketing">Customer Detailed</a></li>
-        <li><a href="{% url 'lead_dashboard' %}?department=salesmarketing">Lead Detailed</a></li>
-      </ul>
-    </li>
-    {% endif %}
 
     <!-- 🏗️ Construction Access -->
     {% if request.user_email in [
